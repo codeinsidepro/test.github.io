@@ -9,15 +9,20 @@
 <body>
     <!-- Header / Navigation -->
     <header>
-        <div class="container">
+        <div class="container header-container">
             <h1 class="logo">Code Inside Pro</h1>
             <nav>
-                <ul>
+                <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#news">News & Media</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </nav>
         </div>
     </header>
@@ -34,4 +39,84 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2>About Us
+            <h2>About Us</h2>
+            <p>Code Inside Pro is a leading web development, hosting, and software firm based in Dhaka. 
+            We specialize in creating custom websites, scalable software solutions, and reliable hosting services 
+            for businesses of all sizes. Our mission is to deliver high-quality digital solutions that help our clients grow and succeed in the modern digital world.</p>
+        </div>
+    </section>
+
+    <!-- News & Media Section -->
+    <section id="news" class="news">
+        <div class="container">
+            <h2>News & Media</h2>
+            <p>Stay connected with us on social media:</p>
+            <div class="social-links">
+                <a href="#" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Twitter</a>
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Address: Chitra Villa, 143/13, North Matikata, Dhaka Cantonment, Dhaka-1206</p>
+            <div class="map">
+                <iframe 
+                    src="https://www.google.com/maps?q=Chitra+Villa,+143/13,+North+Matikata,+Dhaka+Cantonment,+Dhaka-1206&output=embed" 
+                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© <span id="year"></span> Code Inside Pro. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Auto-update year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+        });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('section');
+        const options = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
