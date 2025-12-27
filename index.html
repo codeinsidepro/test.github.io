@@ -71,8 +71,27 @@
                     width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
                 </iframe>
             </div>
+            <button class="btn" id="contactBtn">Send Message</button>
         </div>
     </section>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Send Us a Message</h2>
+            <form id="contactForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="btn">Send</button>
+            </form>
+            <p id="formMsg"></p>
+        </div>
+    </div>
+
+    <!-- Back to top -->
+    <button id="backToTop">&#8679;</button>
 
     <!-- Footer -->
     <footer>
@@ -97,7 +116,6 @@
         // Hamburger menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
-
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('toggle');
@@ -105,17 +123,39 @@
 
         // Scroll animations
         const sections = document.querySelectorAll('section');
-        const options = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting){
                     entry.target.classList.add('animate');
                 }
             });
-        }, options);
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
 
-        sections.forEach(section => {
-            observer.observe(section);
+        // Back to top button
+        const backBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 300) backBtn.style.display = 'block';
+            else backBtn.style.display = 'none';
+        });
+        backBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+        // Modal
+        const modal = document.getElementById('contactModal');
+        const btn = document.getElementById('contactBtn');
+        const span = document.querySelector('.close');
+        const form = document.getElementById('contactForm');
+        const formMsg = document.getElementById('formMsg');
+
+        btn.onclick = () => modal.style.display = 'block';
+        span.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => { if(e.target == modal) modal.style.display = 'none'; }
+
+        // Form submission
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            formMsg.textContent = "Thank you! Your message has been sent.";
+            form.reset();
         });
     </script>
 </body>
