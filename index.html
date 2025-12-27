@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Inside Pro</title>
+    <title>Home - Code Inside Pro</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Header / Navigation -->
+    <!-- Header -->
     <header>
         <div class="container header-container">
             <h1 class="logo">Code Inside Pro</h1>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#news">News & Media</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="news.html">News & Media</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
                 <div class="hamburger">
                     <span></span>
@@ -28,135 +28,19 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section class="hero">
         <div class="hero-content">
             <h2>Welcome to Code Inside Pro</h2>
             <p>Professional web development, hosting, and software solutions for your business.</p>
-            <a href="#contact" class="btn">Get in Touch</a>
+            <a href="contact.html" class="btn">Get in Touch</a>
         </div>
     </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>Code Inside Pro is a leading web development, hosting, and software firm based in Dhaka. 
-            We specialize in creating custom websites, scalable software solutions, and reliable hosting services 
-            for businesses of all sizes. Our mission is to deliver high-quality digital solutions that help our clients grow and succeed in the modern digital world.</p>
-        </div>
-    </section>
-
-    <!-- News & Media Section -->
-    <section id="news" class="news">
-        <div class="container">
-            <h2>News & Media</h2>
-            <p>Stay connected with us on social media:</p>
-            <div class="social-links">
-                <a href="#" target="_blank">Facebook</a>
-                <a href="#" target="_blank">Twitter</a>
-                <a href="#" target="_blank">LinkedIn</a>
-                <a href="#" target="_blank">Instagram</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>Address: Chitra Villa, 143/13, North Matikata, Dhaka Cantonment, Dhaka-1206</p>
-            <div class="map">
-                <iframe 
-                    src="https://www.google.com/maps?q=Chitra+Villa,+143/13,+North+Matikata,+Dhaka+Cantonment,+Dhaka-1206&output=embed" 
-                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
-                </iframe>
-            </div>
-            <button class="btn" id="contactBtn">Send Message</button>
-        </div>
-    </section>
-
-    <!-- Contact Modal -->
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Send Us a Message</h2>
-            <form id="contactForm">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit" class="btn">Send</button>
-            </form>
-            <p id="formMsg"></p>
-        </div>
-    </div>
-
-    <!-- Back to top -->
-    <button id="backToTop">&#8679;</button>
 
     <!-- Footer -->
     <footer>
         <p>© <span id="year"></span> Code Inside Pro. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Auto-update year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Hamburger menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('toggle');
-        });
-
-        // Scroll animations
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting){
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, { threshold: 0.1 });
-        sections.forEach(section => observer.observe(section));
-
-        // Back to top button
-        const backBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if(window.scrollY > 300) backBtn.style.display = 'block';
-            else backBtn.style.display = 'none';
-        });
-        backBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
-
-        // Modal
-        const modal = document.getElementById('contactModal');
-        const btn = document.getElementById('contactBtn');
-        const span = document.querySelector('.close');
-        const form = document.getElementById('contactForm');
-        const formMsg = document.getElementById('formMsg');
-
-        btn.onclick = () => modal.style.display = 'block';
-        span.onclick = () => modal.style.display = 'none';
-        window.onclick = (e) => { if(e.target == modal) modal.style.display = 'none'; }
-
-        // Form submission
-        form.addEventListener('submit', function(e){
-            e.preventDefault();
-            formMsg.textContent = "Thank you! Your message has been sent.";
-            form.reset();
-        });
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
